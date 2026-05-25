@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Resume Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="background-animation">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+  <div class="container">
+    <h1>AI Resume Analyzer</h1>
+
+    <form id="resumeForm">
+
+      <!-- 🔥 Creative Upload Section -->
+      <div class="upload-wrapper">
+
+        <input 
+          type="file" 
+          id="resumeInput" 
+          name="resume" 
+          accept=".pdf" 
+          required 
+          hidden
+        />
+
+        <label for="resumeInput" class="upload-box">
+          <div class="upload-icon">📄</div>
+          <h3>Drop Your Resume Here</h3>
+          <p class="sub-text">or browse from your device</p>
+          <span id="fileLabel" class="file-name"></span>
+        </label>
+
+      </div>
+
+      <!-- Job Description -->
+      <label class="section-label">Paste Job Description</label>
+
+      <textarea 
+        name="jobDescription" 
+        rows="6"
+        placeholder="Paste job description here..."
+        required>
+      </textarea>
+
+      <button type="submit" id="analyzeBtn">
+        Analyze Resume
+      </button>
+
+    </form>
+
+    <!-- OUTPUT -->
+    <div id="output" class="hidden">
+
+      <div class="score">
+        ATS Score: <span id="scoreValue">0%</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div id="result"></div>
+
+    </div>
+
+  </div>
+  
+
+  <script src="script.js"></script>
+
+</body>
+</html>
