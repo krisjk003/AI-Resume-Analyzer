@@ -57,57 +57,106 @@ app.post("/upload", upload.single("resume"), async (req, res) => {
     console.log("📄 Extracted Text Length:", resumeText.length);
 
     // STEP 1: Parse the resume into structured data
-    const parsePrompt = `You are a resume parser. Extract ALL information from this resume text into structured JSON.
+    const parsePrompt = `
+You are a STRICT resume parsing system.
 
-Extract EXACTLY what is in the resume - do NOT invent or fill in anything that isn't there.
-If a field is not found, use null or empty array [].
+Your job is to EXTRACT information exactly as written in the resume text.
 
-Return ONLY valid JSON:
+CRITICAL RULES:
+
+* ONLY extract information explicitly present in the resume
+* NEVER infer, assume, predict, rewrite, summarize, or expand information
+* NEVER add skills, technologies, certifications, domains, tools, or experiences that are not directly written in the resume
+* NEVER convert related technologies into additional skills
+* NEVER hallucinate missing details
+* If information is unclear or missing, return null or []
+
+STRICT EXTRACTION RULES:
+
+* Extract text as closely as possible to the original wording
+* Preserve actual project names and skill names
+* Do NOT normalize into trending industry terms
+* Do NOT infer domains from projects
+* Do NOT classify candidates into AI, Cloud, Data Science, Cybersecurity, etc unless explicitly mentioned
+* If a technology is not directly written, do NOT include it
+* If a skill appears only once in a sentence, do not automatically treat it as expertise
+
+OUTPUT RULES:
+
+* Return ONLY valid raw JSON
+* No markdown
+* No explanations
+* No comments
+* No additional text
+
+Return JSON in this exact format:
 {
-  "name": "extracted full name or null",
-  "contact": {
-    "email": "extracted email or null",
-    "phone": "extracted phone or null",
-    "location": "extracted location/city or null",
-    "linkedin": "extracted linkedin url or null",
-    "github": "extracted github url or null",
-    "website": "extracted website or null"
-  },
-  "summary": "extracted summary/objective paragraph or null",
-  "skills": ["skill1", "skill2"],
-  "experience": [
-    {
-      "title": "Job Title",
-      "company": "Company Name",
-      "location": "City, State",
-      "duration": "Jan 2022 - Present",
-      "bullets": ["bullet point 1", "bullet point 2"]
-    }
-  ],
-  "education": [
-    {
-      "degree": "Degree Name",
-      "institution": "University Name",
-      "year": "2020",
-      "gpa": "3.8 or null"
-    }
-  ],
-  "projects": [
-    {
-      "name": "Project Name",
-      "tech": ["tech1", "tech2"],
-      "description": "description",
-      "bullets": ["bullet1"]
-    }
-  ],
-  "certifications": ["cert1", "cert2"],
-  "achievements": ["achievement1"],
-  "detected_domains": [],
-  "primary_domain": ""
+"name": "extracted full name or null",
+
+"contact": {
+"email": "extracted email or null",
+"phone": "extracted phone or null",
+"location": "extracted location/city or null",
+"linkedin": "extracted linkedin url or null",
+"github": "extracted github url or null",
+"website": "extracted website or null"
+},
+
+"summary": "summary/objective exactly as written or null",
+
+"skills": [],
+
+"experience": [
+{
+"title": "exact title or null",
+"company": "exact company name or null",
+"location": "exact location or null",
+"duration": "exact duration or null",
+"bullets": []
+}
+],
+
+"education": [
+{
+"degree": "exact degree name or null",
+"institution": "exact institution name or null",
+"year": "exact year or null",
+"gpa": "exact GPA or null"
+}
+],
+
+"projects": [
+{
+"name": "exact project name or null",
+"tech": [],
+"description": "exact description or null",
+"bullets": []
+}
+],
+
+"certifications": [],
+"achievements": [],
+
+"detected_domains": [],
+"primary_domain": null
 }
 
+DOMAIN DETECTION RULES:
+
+* Only include domains explicitly supported by resume content
+* Do NOT guess domains from generic skills
+* Domains must be conservative and evidence-based
+* Example:
+
+  * Arduino + RFID + 8051 → ["Embedded Systems", "Electronics"]
+  * React + Node.js → ["Web Development"]
+  * MATLAB + DSP → ["Signal Processing"]
+* If domain confidence is weak, return []
+
 Resume text:
-${resumeText}`;
+${resumeText}
+`;
+
 
     // STEP 2: ATS scoring
     const atsPrompt = `You are a hyper-strict ATS (Applicant Tracking System) used by top global companies.
