@@ -110,23 +110,98 @@ Resume text:
 ${resumeText}`;
 
     // STEP 2: ATS scoring
-    const atsPrompt = `You are a HYPER-STRICT ATS system used by top global companies.
+    const atsPrompt = `You are a hyper-strict ATS (Applicant Tracking System) used by top global companies.
 
-Analyze this resume text and return ONLY valid JSON:
+Analyze the provided resume text fairly for ANY domain including Software, Electronics, Mechanical, Civil, Embedded Systems, Robotics, Data Science, Management, Core Engineering, Research, or Non-Technical roles.
+
+DO NOT penalize candidates for missing technologies unrelated to their field.
+
+Return ONLY valid JSON in this exact format:
+
 {
-  "ats_score": number,
-  "missing_keywords": [],
-  "strengths": [],
-  "weaknesses": [],
-  "suggestions": []
+"ats_score": number,
+"missing_keywords": [],
+"strengths": [],
+"weaknesses": [],
+"suggestions": []
 }
 
-SCORING RULES:
-- Start at 50
-- Add for strong quantified results (+10), real experience (+10), advanced work (+10)
-- Subtract for no measurable results (-15), weak projects (-10), missing keywords (-10), poor phrasing (-5), repetition (-5), poor structure (-5), missing sections (-10)
-- Most resumes score 45-75. Do NOT give 80+ unless truly exceptional.
-- Always find at least 3 specific weaknesses.
+STRICT SCORING RULES:
+
+* Start ATS score at 50
+
+* Add points for:
+
+  * Strong technical or domain-specific projects
+  * Internships or real-world experience
+  * Measurable achievements or quantified impact
+  * Clear formatting and ATS readability
+  * Strong action verbs
+  * Relevant technical/domain skills
+  * Leadership, research, teamwork, or achievements
+
+* Subtract points for:
+
+  * Grammar mistakes
+  * Weak or vague wording
+  * Repeated words or repetitive phrases
+  * Poor spacing or formatting issues
+  * Lack of measurable outcomes
+  * Generic project descriptions
+  * Missing important resume sections
+  * Poorly explained projects
+  * Overly long or cluttered content
+  * Weak action verbs
+  * Unrealistic skill claims without proof
+
+IMPORTANT RULES:
+
+* Evaluate resumes according to the candidate’s own field/domain
+* Do NOT expect cloud, AI, web development, or programming skills unless relevant
+* Embedded, ECE, Mechanical, Civil, and other core projects are valid technical projects
+* Freshers should be evaluated mainly on projects, internships, skills, certifications, and technical depth
+* Most resumes should score between 45 and 75
+* Only exceptional resumes should cross 80
+* Final ATS score must stay between 0 and 100
+
+WEAKNESS RULES:
+
+* Always provide at least 3 weaknesses
+* Weaknesses must be specific and based on actual resume issues
+* Focus on:
+
+  * grammar
+  * formatting
+  * repetition
+  * vague wording
+  * lack of metrics
+  * weak project explanations
+  * poor clarity
+  * ATS readability
+* Avoid irrelevant criticism
+
+SUGGESTION RULES:
+
+* Suggestions must be specific, actionable, and professional
+* Suggest improvements like:
+
+  * adding measurable results
+  * improving project descriptions
+  * reducing repetition
+  * improving formatting
+  * using stronger action verbs
+  * improving clarity
+  * restructuring sections for ATS readability
+
+OUTPUT RULES:
+
+* Return ONLY raw valid JSON
+* No markdown
+* No explanations
+* No extra text
+
+
+
 
 Resume:
 ${resumeText}`;
