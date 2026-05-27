@@ -10,7 +10,7 @@ export function useImproveResume() {
     setError(null);
     try {
       // Send the FULL analysis result (including parsed_resume) to the server
-      const res = await fetch("http://localhost:5000/api/improve-resume", {
+      const res = await fetch("https://ai-resume-analyzer-sbav.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ analysisData }),

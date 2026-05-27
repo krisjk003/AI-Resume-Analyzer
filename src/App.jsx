@@ -387,7 +387,7 @@ export default function App() {
     formData.append("resume", file);
 
     try {
-      const res = await fetch("http://localhost:5000/upload", { method:"POST", body:formData });
+      const res = await fetch("https://ai-resume-analyzer-sbav.onrender.com/upload", { method:"POST", body:formData });
       const raw = await res.json();
       console.log("RAW API RESPONSE:", raw);
 
