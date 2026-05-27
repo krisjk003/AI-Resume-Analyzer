@@ -324,10 +324,23 @@ YOUR TASK:
 1. Use the EXACT personal details from the resume (name, email, phone, etc.)
 2. Keep ALL original experience, education, projects exactly as they are
 3. IMPROVE bullet points - make them stronger with action verbs and quantified impact
-4. Integrate the missing keywords NATURALLY into bullets and summary
-5. Write an improved professional summary using their actual background
-6. Add relevant skills they likely have based on their experience (do not invent unrelated skills)
-7. Fix weak phrasing and passive voice
+4. Improve ATS readability using ONLY keywords, skills, technologies, and domains already present in the original resume
+5. Rewrite the professional summary using ONLY the candidate’s actual background and existing resume content
+6. NEVER add new skills, technologies, certifications, domains, or tools that are not explicitly mentioned in the original resume
+7. If a keyword is missing but not supported by the resume, DO NOT add it
+8. Preserve honesty and interview safety at all times
+
+9. Fix weak phrasing and passive voice
+10. Keep the resume concise and recruiter-friendly
+11. Freshers and students should remain within 1 page whenever possible
+12. Early-career resumes should not exceed 2 pages
+13. Avoid unnecessary expansion or filler content
+14. Keep bullet points short, impactful, and ATS-friendly
+15. Limit project and experience sections to 2-4 concise bullet points each
+16. Keep summaries compact (2-4 lines maximum)
+17. Avoid repeating the same skills or technologies across multiple sections
+18. Prioritize clarity, readability, and compact formatting over excessive wording
+
 
 CRITICAL RULES:
 - NEVER use placeholder text like "Full Name", "example@email.com", "ABC Corporation"
